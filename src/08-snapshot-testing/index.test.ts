@@ -1,14 +1,30 @@
-// Uncomment the code below and write your tests
-// import { generateLinkedList } from './index';
+import { generateLinkedList } from './index';
 
 describe('generateLinkedList', () => {
-  // Check match by expect(...).toStrictEqual(...)
+  const getNumbersArray = (n: number): number[] => {
+    const a = [];
+    for (let i = 1; i <= n; i++) {
+      a.push(i);
+    }
+    return a;
+  };
+
+  const numberOfElements = 5;
+  const elements = getNumbersArray(numberOfElements);
+  const sameElements = getNumbersArray(numberOfElements);
+  const otherElements = getNumbersArray(numberOfElements).concat(-1);
+
+  const list = generateLinkedList(elements);
+  const sameStructureList = generateLinkedList(sameElements);
+  const otherStructureList = generateLinkedList(otherElements);
+
   test('should generate linked list from values 1', () => {
-    // Write your test here
+    expect(list).toStrictEqual(sameStructureList);
+    expect(list).not.toStrictEqual(otherStructureList);
   });
 
-  // Check match by comparison with snapshot
   test('should generate linked list from values 2', () => {
-    // Write your test here
+    expect(list).toMatchSnapshot();
+    expect(sameStructureList).toMatchSnapshot();
   });
 });
